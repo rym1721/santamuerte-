@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>santa muerte</title>
+  <style>
+    body {
+      --bg:#111;
+      --window:#222;
+      --title:#333;
+      --menu:#444;
+      --border:#555;
+      --text:#ddd;
+    }
+    html,body{height:100%;margin:0;}
+    body{
+      background:var(--bg);
+      font-family: "Courier New", monospace;
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px 10px;
+      box-sizing:border-box;
+    }
+    .window{
+      width:400px;
+      height:90vh;
+      background:var(--window);
+      border:2px solid var(--border);
+      box-shadow:0 0 15px rgba(0,0,0,.7);
+      display:flex;
+      flex-direction:column;
+    }
+    .titlebar {
+      background: #333;
+      padding: 5px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+    }
+    .titlebar .left{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .titlebar .title{ font-size:14px; }
+    .titlebar .controls{ font-size:14px; opacity:.95; }
+    .back-btn{
+      display:none;
+      background:var(--menu);
+      color:#fff;
+      border:none;
+      padding:4px 8px;
+      cursor:pointer;
+      border-radius:3px;
+      font-size:14px;
+    }
+    .menu{
+      background:var(--menu);
+      padding:6px 8px;
+      font-size:12px;
+      border-bottom:1px solid var(--border);
+    }
+    .content{
+      flex:1;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .profile { padding: 10px; }
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #888;
+    }
+    .stats {
+      margin: 10px 0;
+      font-size: 14px;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .stat-item {
+      margin-right: 15px;
+      text-align: left;
+    }
+    .number {
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+    }
+    .label {
+      display: block;
+      font-size: 12px;
+    }
+    .bio { font-size: 13px; margin-bottom: 10px; }
+    .buttons button {
+      background: #555;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      margin: 3px;
+      cursor: pointer;
+    }
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:5px;
+      padding:14px;
+    }
+    .gallery img{
+      width:100%;
+      height:110px;
+      object-fit:cover;
+      filter:grayscale(100%);
+      cursor:pointer;
+      display:block;
+    }
+    .feed{ display:none; padding:8px; }
+    .post{
+      background:var(--window);
+      border:2px solid var(--border);
+      margin:10px 0;
+      overflow:hidden;
+    }
+    .post-head{
+      display:flex;
+      align-items:center;
+      gap:19px;
+      padding:11px;
+      background:#2b2b2b;
+      border-bottom:1px solid var(--border);
+    }
+    .post-head img{
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      border:1px solid #888;
+      object-fit:cover;
+    }
+    .post-head .uname{
+      font-weight:bold;
+      font-size:20px;
+      text-transform:lowercase;
+    }
+    .post-img img{ width:100%; display:block; filter:grayscale(100%); }
+    .post-actions{ display:flex; gap:10px; padding:8px; background:#2a2a2a; font-size:16px; }
+    .likes{ padding:0 10px; font-size:13px; color:var(--text); }
+    .caption{ padding:6px 10px; font-size:13px; color:var(--text); }
+    .view-comments{ padding:0 10px 8px; font-size:12px; color:#bbb; text-decoration:underline; }
+    .time{ padding:0 10px 10px; font-size:11px; color:#999; }
+    .dock{ display:flex; justify-content:space-between; padding:6px 8px; background:var(--menu); border-top:1px solid var(--border); font-size:14px; }
+    .marquee{
+      background:var(--menu);
+      padding:10px 12px;
+      font-size:16px;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+    .marquee span{
+      display:inline-block;
+      padding-left:100%;
+      animation:scroll 12s linear infinite;
+    }
+    @keyframes scroll{
+      from{transform:translateX(0%);}
+      to{transform:translateX(-100%);}
+    }
+    @media(max-width:420px){
+      .window{width:320px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="window" role="application" aria-label="instagram retro window">
+    <div class="titlebar">
+      <div class="left">
+        <button id="backBtn" class="back-btn" title="назад">←</button>
+        <div class="title">instagram.exe</div>
+      </div>
+      <div class="controls">☐ ✕</div>
+    </div>
+    <div class="menu">File Edit View Options Help</div>
+    <div class="content" id="content">
+      <div id="profileBlock">
+        <div class="profile">
+          <div class="profile-row">
+            <img src="https://i.pinimg.com/736x/d9/bc/9a/d9bc9a8e5403ac3b6ee81f16c831c79e.jpg" alt="avatar">
+            <div>
+              <div class="name">santa muerte</div>
+              <div class="stats">
+                <div class="stat-item">
+                  <span class="number">128</span>
+                  <span class="label">posts</span>
+                </div>
+                <div class="stat-item">
+                  <span class="number">853</span>
+                  <span class="label">followers</span>
+                </div>
+                <div class="stat-item">
+                  <span class="number">2062</span>
+                  <span class="label">following</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bio">killin’ me now.</div>
+          <div class="buttons">
+            <button id="followingBtn">following</button>
+            <button id="messageBtn">message</button>
+          </div>
+        </div>
+        <div class="gallery" id="galleryBlock">
+          <img src="https://i.pinimg.com/736x/12/65/91/126591148911c018be0282338514b33e.jpg" alt="pic1" data-index="0">
+          <img src="https://i.pinimg.com/736x/33/4c/19/334c198a46a6c45726ba49157fdcb0ee.jpg" alt="pic2" data-index="1">
+          <img src="https://i.pinimg.com/736x/91/05/51/9105512b661bf3699c45d34b127d64b9.jpg" alt="pic3" data-index="2">
+          <img src="https://i.pinimg.com/736x/b3/d6/6e/b3d66e14c385ea07696964994a0d418c.jpg" alt="pic4" data-index="3">
+          <img src="https://i.pinimg.com/736x/e2/ab/5c/e2ab5c6e7de8067110187074e5d28ce6.jpg" alt="pic5" data-index="4">
+          <img src="https://i.pinimg.com/736x/86/38/8a/86388a70b660b427428c5922ac165471.jpg" alt="pic6" data-index="5">
+        </div>
+      </div>
+      <div id="feedBlock" class="feed" aria-live="polite"></div>
+    </div>
+    <div class="marquee"><span>♫ I was all over her - Salvia Palth ♫</span></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const images = [
+        "https://i.pinimg.com/736x/12/65/91/126591148911c018be0282338514b33e.jpg",
+        "https://i.pinimg.com/736x/33/4c/19/334c198a46a6c45726ba49157fdcb0ee.jpg",
+        "https://i.pinimg.com/736x/91/05/51/9105512b661bf3699c45d34b127d64b9.jpg",
+        "https://i.pinimg.com/736x/b3/d6/6e/b3d66e14c385ea07696964994a0d418c.jpg",
+        "https://i.pinimg.com/736x/e2/ab/5c/e2ab5c6e7de8067110187074e5d28ce6.jpg",
+        "https://i.pinimg.com/736x/86/38/8a/86388a70b660b427428c5922ac165471.jpg"
+      ];
+      const likes = [666,230,310,452,174,230];
+      const comments = [463,98,237,199,153,200];
+      const times = ["1 days ago","2 days ago","5 days ago","1 week ago","2 week ago","4 weeks ago"];
+      const captions = [
+        "she thought her heart was hurting. it turned out the bra was too tight.",
+        "every flower blooms in its own time.",
+        "it really hurts, but I won't show it...",
+        "see a beautiful man? forget about him. the devil was beautiful too.",
+        "and the devil was once an angel.",
+        "cry victim of a broken condom))"
+      ];
+
+      const feed = document.getElementById('feedBlock');
+      const profileBlock = document.getElementById('profileBlock');
+      const galleryBlock = document.getElementById('galleryBlock');
+      const backBtn = document.getElementById('backBtn');
+      const followingBtn = document.getElementById('followingBtn');
+      const messageBtn = document.getElementById('messageBtn');
+      const content = document.getElementById('content');
+
+      function buildFeed(){
+        feed.innerHTML = '';
+        for(let i = 0; i < images.length; i++){
+          const post = document.createElement('article');
+          post.className = 'post';
+          post.innerHTML = `
+            <div class="post-head">
+              <img src="https://i.pinimg.com/736x/d9/bc/9a/d9bc9a8e5403ac3b6ee81f16c831c79e.jpg" alt="avatar">
+              <div class="uname">santa muerte</div>
+            </div>
+            <div class="post-img"><img src="${images[i]}" alt="post image"></div>
+            <div class="likes">♥ ${likes[i]} likesㅤ 🗨️ ${comments[i]} comments</div>
+            <div class="caption"><strong>${captions[i] || ''}</strong></div>
+            <div class="view-comments">view all ${comments[i]} comments</div>
+            <div class="time">${times[i]}</div>
+          `;
+          feed.appendChild(post);
+        }
+      }
+
+      function openFeed(){
+        buildFeed();
+        profileBlock.style.display = 'none';
+        galleryBlock.style.display = 'none';
+        feed.style.display = 'block';
+        backBtn.style.display = 'inline-block';
+        content.scrollTop = 0;
+      }
+
+      function openFeedAndScrollTo(index){
+        openFeed();
+        setTimeout(()=> {
+          const posts = feed.querySelectorAll('.post');
+          if(posts[index]) posts[index].scrollIntoView({behavior:'smooth', block:'start'});
+        }, 60);
+      }
+
+      function closeFeed(){
+        feed.style.display = 'none';
+        profileBlock.style.display = 'block';
+        galleryBlock.style.display = 'grid';
+        backBtn.style.display = 'none';
+        content.scrollTop = 0;
+      }
+
+      followingBtn.addEventListener('click', openFeed);
+      backBtn.addEventListener('click', closeFeed);
+
+      messageBtn.addEventListener('click', ()=> {
+        window.open('https://t.me/ssmuertee','_blank');
+      });
+
+      galleryBlock.addEventListener('click', (e)=>{
+        const img = e.target.closest('img');
+        if(!img) return;
+        const idx = Number(img.dataset.index);
+        if(!isNaN(idx)) openFeedAndScrollTo(idx);
+      });
+    });
+  </script>
+</body>
+</html>
