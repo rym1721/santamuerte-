@@ -23,15 +23,18 @@
       padding:20px 10px;
       box-sizing:border-box;
     }
-    .window{
-      width:400px;
-      height:90vh;
-      background:var(--window);
-      border:2px solid var(--border);
-      box-shadow:0 0 15px rgba(0,0,0,.7);
-      display:flex;
-      flex-direction:column;
-    }
+    .window {
+  width: 100%;
+  max-width: 400px; /* на больших экранах будет не шире */
+  height: 90vh;
+  background: var(--window);
+  border: 2px solid var(--border);
+  box-shadow: 0 0 15px rgba(0,0,0,.7);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; /* чтобы было по центру */
+}
+
     .titlebar {
       background: #333;
       padding: 5px;
@@ -315,6 +318,8 @@
         if(!isNaN(idx)) openFeedAndScrollTo(idx);
       });
     });
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </script>
 </body>
+
 </html>
