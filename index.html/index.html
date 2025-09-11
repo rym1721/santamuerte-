@@ -16,49 +16,99 @@
 
 
     html,body{height:100%;margin:0;}
- body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  display: flex;
-  justify-content: center;
-}
+  body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-.window {
-  width: 100%;          /* всегда на всю ширину экрана */
-  max-width: 400px;     /* но не больше 400px */
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: #222;
-  color: white;
-  overflow: hidden;
-}
+    .window {
+      width: 100%;
+      max-width: 500px; /* на ПК окно ограничено */
+      height: 100vh;    /* на телефоне растянуто под экран */
+      background: #222;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #444;
+    }
 
-.content {
-  flex: 1;
-  overflow-y: auto;
-}
+    .header {
+      background: #333;
+      padding: 5px 10px;
+      font-family: monospace;
+      font-size: 14px;
+    }
 
-.posts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
+    .profile {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+    }
 
-.posts img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-.footer {
-  background: #333;
-  color: #aaa;
-  padding: 6px;
-  font-size: 12px;
-  text-align: center;
-}
+    .info {
+      font-size: 14px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 15px;
+      margin: 5px 0;
+      font-size: 13px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .buttons button {
+      background: #444;
+      border: none;
+      padding: 5px 10px;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .posts img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+
+    .footer {
+      background: #333;
+      color: #aaa;
+      padding: 6px;
+      font-size: 12px;
+      text-align: center;
+    }
 
 
     }
@@ -313,6 +363,7 @@
 </body>
 
 </html>
+
 
 
 
