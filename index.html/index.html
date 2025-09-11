@@ -25,7 +25,8 @@
 }
 
 .window {
-  width: 400px;         /* как у телефона */
+  width: 100%;          /* всегда на всю ширину экрана */
+  max-width: 400px;     /* но не больше 400px */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,18 +37,18 @@
 
 .content {
   flex: 1;
-  overflow-y: auto;     /* чтобы можно было скроллить */
+  overflow-y: auto;
 }
 
 .posts {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 в ряд */
+  grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
 
 .posts img {
   width: 100%;
-  aspect-ratio: 1/1;   /* квадраты */
+  aspect-ratio: 1/1;
   object-fit: cover;
 }
 
@@ -58,6 +59,7 @@
   font-size: 12px;
   text-align: center;
 }
+
 
     }
     .profile { padding: 10px; }
@@ -311,6 +313,7 @@
 </body>
 
 </html>
+
 
 
 
