@@ -59,11 +59,11 @@
     .titlebar .title{ font-family: monospace; }
 
     /* основной контент с прокруткой */
-    .content{
-      flex:1;
-      overflow-y:auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    .container {
+  max-width: 420px; /* было 450px, сделал чуть меньше */
+  margin: 0 auto;
+}
+
 
     /* профиль */
     .profile{
@@ -201,34 +201,24 @@
   </style>
 </head>
 <body>
-  <div class="window" role="application" aria-label="instagram retro window">
-    <div class="titlebar">
-      <div class="left">
-        <button id="backBtn" class="back-btn" title="назад">←</button>
-        <div class="title">instagram.exe</div>
-      </div>
-      <div class="controls">☐ ✕</div>
-    </div>
+  <div class="profile">
+  <img src="avatar.jpg" alt="profile photo" class="profile-pic">
 
-    <div class="content" id="content">
-      <!-- PROFILE BLOCK -->
-      <div id="profileBlock">
-        <div class="profile">
-          <img class="avatar" src="https://i.pinimg.com/736x/d9/bc/9a/d9bc9a8e5403ac3b6ee81f16c831c79e.jpg" alt="avatar">
-          <div class="profile-info">
-            <div class="name">santa muerte</div>
-            <div class="stats">
-              <div class="stat-item"><span class="number">128</span><span class="label">posts</span></div>
-              <div class="stat-item"><span class="number">853</span><span class="label">followers</span></div>
-              <div class="stat-item"><span class="number">2062</span><span class="label">following</span></div>
-            </div>
-            <div class="bio">killin’ me now.</div>
-            <div class="buttons">
-              <button id="followingBtn" class="btn">following</button>
-              <button id="messageBtn" class="btn">message</button>
-            </div>
-          </div>
-        </div>
+  <div class="profile-info">
+    <h2 class="username">santa muerte</h2>
+    <div class="stats">
+      <div><strong>128</strong><br>posts</div>
+      <div><strong>899</strong><br>followers</div>
+      <div><strong>2062</strong><br>following</div>
+    </div>
+    <p class="description">killin’ me now.</p>
+    <div class="buttons">
+      <button class="follow-btn">following</button>
+      <a href="https://t.me/yourchannel" target="_blank" class="message-btn">message</a>
+    </div>
+  </div>
+</div>
+
 
         <div class="gallery" id="galleryBlock" aria-label="gallery">
           <img src="https://i.pinimg.com/736x/12/65/91/126591148911c018be0282338514b33e.jpg" alt="pic1" data-index="0">
@@ -351,3 +341,4 @@
   </script>
 </body>
 </html>
+
