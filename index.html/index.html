@@ -19,129 +19,147 @@
 
     /* базовая сетка */
     html,body{height:100%;margin:0;}
+    body {
+      --bg:#111;
+      --window:#222;
+      --title:#333;
+      --menu:#444;
+      --border:#555;
+      --text:#ddd;
+    }
+    html,body{height:100%;margin:0;}
     body{
-      background: #000;
+      background:var(--bg);
+      font-family: "Courier New", monospace;
+      color:var(--text);
       display:flex;
       justify-content:center;
-      align-items:flex-start;
-      padding:12px;
+      align-items:center;
+      padding:20px 10px;
       box-sizing:border-box;
-      font-family: "Courier New", monospace;
-      color:var(--muted);
-      -webkit-font-smoothing:antialiased;
     }
-
-    /* "окошко" — занимает ширину экрана на телефоне, но не больше 420px на десктопе */
     .window{
-      width: 100%;
-      max-width: 420px;
-      height: calc(100vh - 24px); /* чуть меньше окна, чтобы не заходить за шторку */
-      background: var(--window);
-      border: 2px solid var(--border);
-      box-shadow: 0 0 20px rgba(0,0,0,.8);
+      width:400px;
+      height:90vh;
+      background:var(--window);
+      border:2px solid var(--border);
+      box-shadow:0 0 15px rgba(0,0,0,.7);
       display:flex;
       flex-direction:column;
-      overflow: hidden;
     }
-
-    .titlebar{
-      background: var(--menu);
-      color: #ddd;
-      font-size: 13px;
-      padding:6px 8px;
-      border-bottom:1px solid var(--border);
+    .titlebar {
+      background: #333;
+      padding: 5px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+    }
+    .titlebar .left{
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      box-sizing:border-box;
-    }
-    .titlebar .left{ display:flex; align-items:center; gap:8px; }
-    .titlebar .title{ font-family: monospace; }
-
-    /* основной контент с прокруткой */
-    .container {
-  max-width: 420px; /* было 450px, сделал чуть меньше */
-  margin: 0 auto;
-}
-
-
-    /* профиль */
-    .profile{
-      padding:12px;
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-    }
-    .avatar{
-      width:64px;
-      height:64px;
-      border-radius:50%;
-      border:2px solid #888;
-      object-fit:cover;
-      flex:0 0 64px;
-    }
-    .profile-info{ flex:1; }
-    .name{ font-size:16px; margin-bottom:8px; color:#ddd; text-transform:lowercase; }
-    .stats{ display:flex; gap:14px; align-items:flex-end; margin-bottom:8px; }
-    .stat-item{ text-align:left; line-height:1; }
-    .stat-item .number{ font-family: "Poppins", sans-serif; font-size:15px; color:#e6e6e6; display:block; }
-    .stat-item .label{ font-size:11px; color:#bfbfbf; display:block; margin-top:2px; }
-
-    .bio{ font-size:13px; color:#cfcfcf; margin-bottom:8px; }
-
-    .buttons{ display:flex; gap:8px; margin-bottom:6px; }
-    .btn{
-      background:#444;
-      color:#fff;
-      border: none;
-      padding:6px 10px;
-      border-radius:4px;
-      cursor:pointer;
-      font-size:13px;
-    }
-
-    /* галерея (миниатюры) */
-    .gallery{
-      padding:10px;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
       gap:6px;
-      box-sizing:border-box;
+    }
+    .titlebar .title{ font-size:14px; }
+    .titlebar .controls{ font-size:14px; opacity:.95; }
+    .back-btn{
+      display:none;
+      background:var(--menu);
+      color:#fff;
+      border:none;
+      padding:4px 8px;
+      cursor:pointer;
+      border-radius:3px;
+      font-size:14px;
+    }
+    .menu{
+      background:var(--menu);
+      padding:6px 8px;
+      font-size:12px;
+      border-bottom:1px solid var(--border);
+    }
+    .content{
+      flex:1;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .profile { padding: 10px; }
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #888;
+    }
+    .stats {
+      margin: 10px 0;
+      font-size: 14px;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .stat-item {
+      margin-right: 15px;
+      text-align: left;
+    }
+    .number {
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+    }
+    .label {
+      display: block;
+      font-size: 12px;
+    }
+    .bio { font-size: 13px; margin-bottom: 10px; }
+    .buttons button {
+      background: #555;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      margin: 3px;
+      cursor: pointer;
+    }
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:5px;
+      padding:14px;
     }
     .gallery img{
       width:100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      display:block;
-      border-radius:3px;
-      /* убираем ч/б фильтр (если нужен — можно вернуть) */
-      filter: none;
+      height:110px;
+      object-fit:cover;
+      filter:grayscale(100%);
       cursor:pointer;
+      display:block;
     }
-
-    /* лента (feed) — скрыта по умолчанию */
-    .feed{
-      display:none;
-      padding:10px;
-      box-sizing:border-box;
-    }
+    .feed{ display:none; padding:8px; }
     .post{
-      background: var(--window);
-      border: 1px solid var(--border);
-      margin-bottom:14px;
-      border-radius:4px;
+      background:var(--window);
+      border:2px solid var(--border);
+      margin:10px 0;
       overflow:hidden;
     }
     .post-head{
       display:flex;
-      gap:10px;
       align-items:center;
-      padding:8px 10px;
-      background:#2a2a2a;
+      gap:19px;
+      padding:11px;
+      background:#2b2b2b;
       border-bottom:1px solid var(--border);
     }
-    .post-head img{ width:36px; height:36px; border-radius:50%; object-fit:cover; border:1px solid #777; }
-    .post-head .uname{ font-weight:600; color:#eee; font-size:15px; text-transform:lowercase; }
+    .post-head img{
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      border:1px solid #888;
+      object-fit:cover;
+    }
+    .post-head .uname{
+      font-weight:bold;
+      font-size:20px;
+      text-transform:lowercase;
+    }
 
     .post-img img{
       width:100%;
@@ -362,5 +380,6 @@
   </script>
 </body>
 </html>
+
 
 
